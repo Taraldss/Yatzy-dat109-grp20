@@ -1,0 +1,41 @@
+.navbar{
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    width: 100%;
+    height: 70px;
+    border: 1px solid grey;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: 	#F8F8FF;
+
+}
+.navbar > div {
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    height: 100%;
+    align-items: center;
+}
+.navbar > div:nth-child(even){
+    justify-content: flex-end;
+}
+.logo{
+    align-items: center;
+}
+.navButtons > p {
+    display: flex;
+    border-bottom: 1px solid blue;
+    height: 100%;
+    width: 10%;
+    align-items: center;
+    justify-content: center;
+    padding-right: 5px;
+}
+
+.navButtons > p:hover {
+    border-color: blue;
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+    cursor: pointer;
+    box-shadow: 0 6px 6px rgba(0,0,0,0.2);
+}
