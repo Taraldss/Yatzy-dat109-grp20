@@ -1,6 +1,6 @@
-
 import React from 'react';
+import User from '~/src/types/User';
 
-const userContext = React.createContext({user: {}});
+const UserContext = React.createContext({});
 
-export { userContext };
+export { UserContext };
