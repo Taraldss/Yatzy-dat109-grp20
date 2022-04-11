@@ -1,4 +1,4 @@
-import type Game from "~/src/types/Game";
+import type Game from "~/types/Game";
 
 const game: Game = {
   rounds: 0,

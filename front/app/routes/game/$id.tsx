@@ -1,5 +1,5 @@
-import RealTimeDice from "~/src/components/RealTimeDice";
-import ScoreTable from "~/src/components/ScoreTable";
+import RealTimeDice from "~/components/RealTimeDice";
+import ScoreTable from "~/components/ScoreTable";
 import { json, useLoaderData } from "remix";
 import type { LoaderFunction } from "remix";
 

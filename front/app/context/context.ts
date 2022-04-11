@@ -1,5 +1,5 @@
-import React from 'react';
-import User from '~/src/types/User';
+import React from "react";
+import type User from "~/types/User";
 
 const UserContext = React.createContext({});
 
