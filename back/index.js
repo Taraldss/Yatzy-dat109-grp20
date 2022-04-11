@@ -1,10 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const app = express();
 const port = 3030;
 const db = require("./queries");
 
 app.use(bodyParser.json());
+app.use(cors());
 app.use(
   bodyParser.urlencoded({
     extended: true,
@@ -13,7 +15,13 @@ app.use(
 
 const rDice = () => Math.floor(Math.random() * 6 + 1);
 
-let currentDice = { 1: [rDice(), rDice(), rDice(), rDice(), rDice()] };
+let currentDice = [
+  { value: rDice(), held: false },
+  { value: rDice(), held: false },
+  { value: rDice(), held: false },
+  { value: rDice(), held: false },
+  { value: rDice(), held: false },
+];
 let mockGames = {
   123: {
     rounds: 0,
@@ -71,20 +79,15 @@ app.post("/game/new", (req, res) => {
 });
 app.get("/game/:id", (req, res) => {
   // status of game
-  res.json(mockGames[req.params.id]);
+  res.json(mockGames[req.params.id] ? mockGames[req.params.id] : null);
 });
 app.get("/game/:id/dice", (req, res) => {
   // current dice in #id game
   res.json(currentDice[req.params.id]);
 });
-app.get("/game/:id/dice/roll", (req, res) => {
+app.get("/game/:id/roll", (req, res) => {
   // current dice in #id game
-  res.json(
-    (currentDice = {
-      ...currentDice,
-      [req.params.id]: [rDice(), rDice(), rDice(), rDice(), rDice()],
-    })
-  );
+  res.json(currentDice);
 });
 app.post("/game/:id/dice", (req, res) => {
   // update dice in #id game
