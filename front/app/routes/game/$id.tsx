@@ -10,10 +10,17 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function Index() {
   const game = useLoaderData();
-  const submitScore = (dice: number[], round: number) => {};
+  const submitScore = (dice: number[], round: number, id: number) => {
+    console.log(
+      `You scored ${JSON.stringify(dice)} in round ${round}, in game ${id}}`
+    );
+  };
 
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
+    <div
+      style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}
+      className="flex"
+    >
       {game ? <ScoreTable game={game.data} /> : "Game not found"}
       <RealTimeDice
         round={game.data.round}

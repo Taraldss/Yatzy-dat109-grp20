@@ -1,0 +1,20 @@
+.bg-blue {
+  background-color: lightblue;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table td {
+  padding: 0.25rem 0.5rem;
+  border-bottom: thin solid #eee;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.flex {
+  display: flex;
+}

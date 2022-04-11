@@ -31,7 +31,9 @@ export default function ScoreTable({ game }: { game: Game }) {
       <tr key={"round" + i}>
         <td>{round.name}</td>
         {round.players.map((player, ip) => (
-          <td key={"player" + ip}>{player}</td>
+          <td key={"player" + ip} className="align-right">
+            {player}
+          </td>
         ))}
       </tr>
     ));
@@ -43,7 +45,9 @@ export default function ScoreTable({ game }: { game: Game }) {
           <tr>
             <td></td>
             {game.players.map((player) => (
-              <td key={player}>{player}</td>
+              <td className="align-right" key={player}>
+                {player}
+              </td>
             ))}
           </tr>
         </thead>
@@ -52,20 +56,26 @@ export default function ScoreTable({ game }: { game: Game }) {
           <tr>
             <td>Sum</td>
             {sumAbove.map((player, i) => (
-              <td key={"sum" + i}>{player}</td>
+              <td className="align-right" key={"sum" + i}>
+                {player}
+              </td>
             ))}
           </tr>
           <tr>
             <td>Bonus</td>
             {bonus.map((bonus, i) => (
-              <td key={"bonus" + i}>{bonus}</td>
+              <td className="align-right" key={"bonus" + i}>
+                {bonus}
+              </td>
             ))}
           </tr>
           {renderTableRows(below)}
           <tr>
             <td>Sum</td>
             {sumTotal.map((player, i) => (
-              <td key={"sum" + i}>{player}</td>
+              <td key={"sum" + i} className="align-right">
+                {player}
+              </td>
             ))}
           </tr>
         </tbody>

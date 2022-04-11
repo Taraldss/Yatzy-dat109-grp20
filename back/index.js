@@ -24,7 +24,8 @@ let currentDice = [
 ];
 let mockGames = {
   123: {
-    rounds: 0,
+    round: 0,
+    currentPlayer: 0,
     players: ["arne", "tarald"],
     gameState: [
       [
@@ -81,19 +82,6 @@ app.get("/game/:id", (req, res) => {
   // status of game
   res.json(mockGames[req.params.id] ? mockGames[req.params.id] : null);
 });
-app.get("/game/:id/dice", (req, res) => {
-  // current dice in #id game
-  res.json(currentDice[req.params.id]);
-});
-app.get("/game/:id/roll", (req, res) => {
-  // current dice in #id game
-  res.json(currentDice);
-});
-app.post("/game/:id/dice", (req, res) => {
-  // update dice in #id game
-  res.json(req);
-});
-
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
 });
