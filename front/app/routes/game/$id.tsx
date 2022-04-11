@@ -1,15 +1,24 @@
+import type { LoaderFunction } from "remix";
+import type Game from "~/types/Game";
+
 import RealTimeDice from "~/components/RealTimeDice";
 import ScoreTable from "~/components/ScoreTable";
 import { json, useLoaderData } from "remix";
-import type { LoaderFunction } from "remix";
+import { useState } from "react";
 
 export const loader: LoaderFunction = async ({ params }) => {
   const res = await fetch(`http://localhost:3030/game/${params.id}/`);
   return json({ data: await res.json(), id: params.id });
 };
 
+interface Payload {
+  data: Game;
+  id: number;
+}
+
 export default function Index() {
-  const game = useLoaderData();
+  const payload: Payload = useLoaderData();
+  const [game, setGame] = useState<Game>(payload.data);
   const submitScore = (dice: number[], round: number, id: number) => {
     console.log(
       `You scored ${JSON.stringify(dice)} in round ${round}, in game ${id}}`
