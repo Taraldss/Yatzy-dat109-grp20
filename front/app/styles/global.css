@@ -18,3 +18,32 @@ table td {
 .flex {
   display: flex;
 }
+
+article {
+  max-width: 960px;
+  margin: 0 auto;
+}
+.roll-area {
+  margin-left: 2rem;
+}
+
+button {
+  background-color: green;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  color: white;
+  font-size: 1rem;
+  border: none;
+}
+button.dice {
+  color: #333;
+  font-size: 2rem;
+  padding: 0.25rem 0.75rem;
+  border: thin solid #999;
+  background-color: white;
+  border-radius: 0.25rem;
+}
+
+button.held {
+  background-color: lightgreen;
+}

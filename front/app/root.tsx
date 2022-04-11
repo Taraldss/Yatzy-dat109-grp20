@@ -10,7 +10,7 @@ import type { MetaFunction } from "remix";
 import type User from "~/types/User";
 import { UserContext } from "~/context/context";
 import { useState } from "react";
-import styles from "~/src/styles/global.css";
+import styles from "~/styles/global.css";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -31,12 +31,14 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
-          <Outlet />
-        </UserContext.Provider>
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
+        <article>
+          <UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
+            <Outlet />
+          </UserContext.Provider>
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
+        </article>
       </body>
     </html>
   );

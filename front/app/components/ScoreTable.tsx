@@ -1,5 +1,5 @@
 import type Game from "~/types/Game";
-import scorer from "~/helpers/scorer.js";
+import scorer from "~/helpers/scorer";
 
 interface TableData {
   name: string;

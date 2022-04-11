@@ -13,15 +13,6 @@ app.use(
   })
 );
 
-const rDice = () => Math.floor(Math.random() * 6 + 1);
-
-let currentDice = [
-  { value: rDice(), held: false },
-  { value: rDice(), held: false },
-  { value: rDice(), held: false },
-  { value: rDice(), held: false },
-  { value: rDice(), held: false },
-];
 let mockGames = {
   123: {
     round: 0,
@@ -71,7 +62,10 @@ app.get("/", (request, response) => {
 app.get("/users", (req, res) => {
   // shows all users
 });
-app.get("/users/:id", db.getUserById);
+app.get("/users/:id", (req, res) => {
+  const result = await db.getUserById(req.params.id)
+  res.send(result)
+})
 app.post("/users/register", db.createUser);
 app.post("/users/login", db.logIn);
 app.get("/game", (req, res) => {});

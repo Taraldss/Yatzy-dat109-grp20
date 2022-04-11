@@ -39,17 +39,19 @@ export default function RealTimeDice({ round, gameId, submitScore }: OneTurn) {
   }
 
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
+    <div className="roll-area">
       <p>Rolls left: {rollsLeft}</p>
-      {dice.map((d, i) => (
-        <button
-          key={"dice" + i}
-          onClick={() => toggleDice(i)}
-          className={d.held ? "bg-blue" : ""}
-        >
-          {d.value}
-        </button>
-      ))}
+      <p>
+        {dice.map((d, i) => (
+          <button
+            key={"dice" + i}
+            onClick={() => toggleDice(i)}
+            className={d.held ? "held dice" : "dice"}
+          >
+            {d.value}
+          </button>
+        ))}
+      </p>
       {rollsLeft != 0 && (
         <button onClick={() => rollDice(dice)}>Roll dice</button>
       )}
