@@ -7,8 +7,8 @@ import {
   ScrollRestoration,
 } from "remix";
 import type { MetaFunction } from "remix";
-import type User from "./src/types/User";
-import { UserContext } from "./context/context";
+import type User from "~/types/User";
+import { UserContext } from "~/context/context";
 import { useState } from "react";
 import styles from "~/src/styles/global.css";
 

@@ -12,11 +12,13 @@ export default function index() {
         <input
           type="text"
           placeholder="Name..."
+          value={userName}
           onChange={(event) => setUserName(event.target.value)}
         />
         <input
           type="password"
           placeholder="Password.."
+          value={password}
           onChange={(event) => setPassword(event.target.value)}
         />
         <div>
