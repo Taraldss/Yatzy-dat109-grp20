@@ -53,10 +53,20 @@ const logIn = (request, response) => {
     }
   );
 };
+const createGame = (password, action, cb) => {
+  "INSERT INTO users (password, active) VALUES ($1, $2)",
+    [password, action], (err, res) => {
+      if(err){
+        throw err
+      }
+      cb(res.rows[0])
+    }
+}
 
 module.exports = {
   getUsers,
   getUserById,
   createUser,
   logIn,
+  createGame
 };

@@ -77,7 +77,10 @@ app.post("/users/register", db.createUser);
 app.post("/users/login", db.logIn);
 app.get("/game", (req, res) => {});
 app.post("/game/new", (req, res) => {
-  // returns a new game object and an ID of the game
+  function cb(result){
+    res.send(result);
+  }
+  db.createGame(req.params.password, req.params.active, cb)
 });
 app.get("/game/:id", (req, res) => {
   // status of game
