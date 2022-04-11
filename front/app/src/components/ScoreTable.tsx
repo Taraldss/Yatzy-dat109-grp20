@@ -1,4 +1,4 @@
-import rounds from "../helpers/scorer.js";
+import type Game from "~/src/types/Game";
 import scorer from "../helpers/scorer.js";
 
 interface TableData {
@@ -6,10 +6,10 @@ interface TableData {
   players: number[];
 }
 
-export default function ScoreTable({ gameState }: { gameState: number[][][] }) {
+export default function ScoreTable({ game }: { game: Game }) {
   const mergedGameState: TableData[] = scorer.map((round, i) => ({
     name: round.name,
-    players: gameState.map((player) => round.scorer(player[i])),
+    players: game.gameState.map((player) => round.scorer(player[i])),
   }));
   const above: TableData[] = mergedGameState.slice(0, 6);
   const below: TableData[] = mergedGameState.slice(6);
@@ -39,6 +39,14 @@ export default function ScoreTable({ gameState }: { gameState: number[][][] }) {
   return (
     <div>
       <table>
+        <thead>
+          <tr>
+            <td></td>
+            {game.players.map((player) => (
+              <td key={player}>{player}</td>
+            ))}
+          </tr>
+        </thead>
         <tbody>
           {renderTableRows(above)}
           <tr>
