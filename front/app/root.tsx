@@ -9,7 +9,7 @@ import {
 import type { MetaFunction } from "remix";
 import { UserContext } from "./context/context";
 import { useState } from "react";
-import User from "./src/types/User";
+import type User from "./src/types/User";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
