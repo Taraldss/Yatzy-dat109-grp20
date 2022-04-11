@@ -1,6 +1,5 @@
-
 interface DiceObject {
-    value: number,
-    active: boolean,
+  value: number;
+  held: boolean;
 }
 export default DiceObject;
