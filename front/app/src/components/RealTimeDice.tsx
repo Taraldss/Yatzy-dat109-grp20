@@ -3,7 +3,7 @@ import { useState } from "react";
 interface OneTurn {
   round: number;
   gameId: number;
-  submitScore: (result: number[], round: number) => void;
+  submitScore: (result: number[], round: number, id: number) => void;
 }
 
 interface Dice {
@@ -19,25 +19,53 @@ export default function RealTimeDice({ round, gameId, submitScore }: OneTurn) {
     { value: 0, held: false },
     { value: 0, held: false },
   ];
+  const rDice = () => Math.floor(Math.random() * 6 + 1);
   const [rollsLeft, setRollsLeft] = useState(3);
   const [dice, setDice] = useState(emptyDice);
 
-  async function rollDice(dice: Dice[]) {
-    const res = await fetch(`http://localhost:3030/game/${gameId}/roll`);
-    console.log(res);
-    const json = await res.json();
-    console.log(json);
-    setDice(json);
-    setRollsLeft((prevState) => prevState--);
+  function rollDice(dice: Dice[]) {
+    setDice((prevState) =>
+      prevState.map((dice) =>
+        dice.held ? dice : { value: rDice(), held: false }
+      )
+    );
+    setRollsLeft((prevState) => prevState - 1);
+  }
+  function toggleDice(index: number) {
+    if (rollsLeft == 0 || rollsLeft == 3) return null;
+    setDice((prevState) =>
+      prevState.map((d, i) => (i == index ? { ...d, held: !d.held } : d))
+    );
   }
 
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
       <p>Rolls left: {rollsLeft}</p>
       {dice.map((d, i) => (
-        <button key={"dice" + i}>{d.value}</button>
+        <button
+          key={"dice" + i}
+          onClick={() => toggleDice(i)}
+          className={d.held ? "bg-blue" : ""}
+        >
+          {d.value}
+        </button>
       ))}
-      <button onClick={() => rollDice(dice)}>Roll dice</button>
+      {rollsLeft != 0 && (
+        <button onClick={() => rollDice(dice)}>Roll dice</button>
+      )}
+      {rollsLeft < 3 && (
+        <button
+          onClick={() =>
+            submitScore(
+              dice.map((dice) => dice.value),
+              round,
+              gameId
+            )
+          }
+        >
+          Submit score
+        </button>
+      )}
     </div>
   );
 }
