@@ -14,23 +14,8 @@ app.use(
 const rDice = () => Math.floor(Math.random() * 6 + 1);
 
 let currentDice = { 1: [rDice(), rDice(), rDice(), rDice(), rDice()] };
-
-app.get("/", (request, response) => {
-  response.json({ info: "Node.js, Express, and Postgres API" });
-});
-app.get("/users", (req, res) => {
-  // shows all users
-});
-app.get("/users/:id", db.getUserById);
-app.post("/users/register", db.createUser);
-app.post("/users/login", db.logIn);
-app.get("/game", (req, res) => {});
-app.post("/game/new", (req, res) => {
-  // returns a new game object and an ID of the game
-});
-app.get("/game/:id", (req, res) => {
-  // status of game
-  res.json({
+let mockGames = {
+  123: {
     rounds: 0,
     players: ["arne", "tarald"],
     gameState: [
@@ -69,7 +54,24 @@ app.get("/game/:id", (req, res) => {
         [6, 5, 5, 4, 5],
       ],
     ],
-  });
+  },
+};
+app.get("/", (request, response) => {
+  response.json({ info: "Node.js, Express, and Postgres API" });
+});
+app.get("/users", (req, res) => {
+  // shows all users
+});
+app.get("/users/:id", db.getUserById);
+app.post("/users/register", db.createUser);
+app.post("/users/login", db.logIn);
+app.get("/game", (req, res) => {});
+app.post("/game/new", (req, res) => {
+  // returns a new game object and an ID of the game
+});
+app.get("/game/:id", (req, res) => {
+  // status of game
+  res.json(mockGames[req.params.id]);
 });
 app.get("/game/:id/dice", (req, res) => {
   // current dice in #id game
