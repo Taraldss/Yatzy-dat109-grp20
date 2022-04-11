@@ -1,11 +1,10 @@
-import mockState from "~/src/helpers/mockGameState";
 import RealTimeDice from "~/src/components/RealTimeDice";
 import ScoreTable from "~/src/components/ScoreTable";
 import { json, useLoaderData } from "remix";
 import type { LoaderFunction } from "remix";
 
-export const loader: LoaderFunction = async () => {
-  const res = await fetch("http://localhost:3030/game/1/");
+export const loader: LoaderFunction = async ({ params }) => {
+  const res = await fetch(`http://localhost:3030/game/${params.id}/`);
   return json(await res.json());
 };
 
