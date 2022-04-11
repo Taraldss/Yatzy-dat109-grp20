@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Brand from "../../src/view/components/brand/Brand";
 import Button from "../../src/view/components/button/Button";
 import styles from "./index.module.css";
@@ -14,8 +15,16 @@ const LoginPage = () => {
           <input type="text" placeholder="Passord..." />
         </div>
         <div className={styles.buttons}>
-          <Button name={"Login"} onclick={() => null}/>
-          <Button name={"Register"} onclick={() => null}/>
+          <Link href={"/"}>
+            <a>
+            <Button name={"Login"} onclick={() => null}/>
+            </a>
+          </Link>
+          <Link href={"register"}>
+            <a>
+              <Button name={"register"} onclick={() => null}/>
+            </a>
+          </Link>
         </div>
       </div>
     </div>

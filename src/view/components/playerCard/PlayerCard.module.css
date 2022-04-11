@@ -10,6 +10,7 @@
 }
 .active {
     border: 1px solid blue;
+    background-color: wheat;
 }
 
 .playerName{

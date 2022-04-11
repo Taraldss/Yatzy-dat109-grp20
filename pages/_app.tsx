@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import NavBar from '../src/view/components/navbar/NavBar'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <div>
+  return <div className='root'>
     <NavBar />
     <Component {...pageProps} />
   </div>

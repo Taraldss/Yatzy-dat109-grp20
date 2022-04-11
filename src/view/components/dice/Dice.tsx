@@ -3,22 +3,21 @@ import styles from "./Dice.module.css"
 import classnames from 'classnames/bind';
 
 interface Props {
-  value?: number;
+  value: number;
+  active: boolean;
   onclick: () => void;
 }
 const cx = classnames.bind(styles);
-const Dice = ({ onclick, value }: Props) => {
-  const [active, setActive] = useState<boolean>(false);
+const Dice = ({ onclick, value, active }: Props) => {
 
   return (
     <div
       onClick={() => {
         onclick();
-        setActive(!active);
       }}
       className={cx({root: true, active: active,})}
     >
-      {value && Array.from(Array(value), (e, i) => (
+      {Array.from(Array(value), (e, i) => (
         <div key={i} className={styles.eye}></div>
       ))}
       

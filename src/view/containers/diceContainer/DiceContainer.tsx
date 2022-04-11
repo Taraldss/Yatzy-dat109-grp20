@@ -1,58 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../components/button/Button";
 import styles from "./DiceContainer.module.css";
 import DiceObject from "../../../types/resources/DiceObject";
 import Dice from "../../components/dice/Dice";
+import User from "../../../types/resources/User";
+import { checkScore, delay } from "../../../../helpers/helperFunctions";
 
-const DiceContainer = () => {
-  const [dice1, setDice1] = useState<DiceObject>({ value: 1, active: true });
-  const [dice2, setDice2] = useState<DiceObject>({ value: 1, active: true });
-  const [dice3, setDice3] = useState<DiceObject>({ value: 1, active: true });
-  const [dice4, setDice4] = useState<DiceObject>({ value: 1, active: true });
-  const [dice5, setDice5] = useState<DiceObject>({ value: 1, active: true });
-
+interface Props {
+  round: number;
+  onchange: (number:number) => void;
+}
+const DiceContainer = ({ round, onchange }: Props) => {
+  const defaultDice = [{ value: 0, active: true }, { value: 0, active: true }, { value: 0, active: true }, { value: 0, active: true },{ value: 0, active: true }]
+  let [rolls, setRolls] = useState(3);
+  const rounds = ['ones', 'twos','threes','fours', 'fives', 'sixes', 'pair', 'two_pair', 'three_same', 'four_same', 'small_strait','big_strait','house','chance','yatzy'];
+  const [dice, setDice] = useState<DiceObject[]>(defaultDice)
+  const [active, setActive] = useState(false);
+  const toggleDice = (index: number) => setDice(prevState => prevState.map((dice,i) => i === index ? {...dice, active: !dice.active} : dice))
+  const resetDice = () => setDice(defaultDice)
+  useEffect(() => {
+    if (rolls === 0) {
+      onchange(checkScore(round, dice.map(dice => dice.value)));
+      setRolls(3);
+      delay(1000).then(() => resetDice())
+    }
+    
+  }, [rolls])
   return (
     <div className={styles.root}>
+      <p>Collect: {rounds[round - 1]}</p>
       <div className={styles.diceBox}>
-        <Dice
-          onclick={() => setDice1({ ...dice1, active: !dice1.active })}
-          value={dice1?.value}
-        />
-        <Dice
-          onclick={() => setDice2({ ...dice2, active: !dice2.active })}
-          value={dice2?.value}
-        />
-        <Dice
-          onclick={() => setDice3({ ...dice3, active: !dice3.active })}
-          value={dice3?.value}
-        />
-        <Dice
-          onclick={() => setDice4({ ...dice4, active: !dice4.active })}
-          value={dice4?.value}
-        />
-        <Dice
-          onclick={() => setDice5({ ...dice5, active: !dice5.active })}
-          value={dice5?.value}
-        />
+        {dice.map((dice, index) => <Dice active={!dice.active}value={dice.value} onclick={() => toggleDice(index)}/>)}
       </div>
-      <div>
+     {round <= 15 && 
+     <div className={styles.buttons}>
         <Button
-          name={"Trill"}
+          name={`${rolls}: Trill`}
           onclick={() => {
-            dice1.active && setDice1({ ...dice1, value: rollDice() });
-            dice2.active && setDice2({ ...dice2, value: rollDice() });
-            dice3.active &&  setDice3({ ...dice3, value: rollDice() });
-            dice4.active && setDice4({ ...dice4, value: rollDice() });
-            dice5.active && setDice5({ ...dice5, value: rollDice() });
+            setDice(prevState => prevState.map((d) => d.active ? {...d, value: rollDice()}: d))
+            setRolls(rolls-1)
           }}
         />
-      </div>
+        <Button name={"Avslutt"} onclick={() => setRolls(0)}></Button>
+      </div>}
     </div>
   );
 };
 
 export default DiceContainer;
 function rollDice(): number {
-  return Math.floor(Math.random() * 6) +1
+  return Math.floor(Math.random() * 6) + 1;
 }
-

@@ -3,7 +3,7 @@ interface Player {
 
     id: string,
     name: string,
-    ones: number | null,
+    ones: number,
     twos: number,
     threes: number,
     fours: number,
@@ -16,6 +16,7 @@ interface Player {
     four_same: number,
     small_strait: number,
     big_strait: number,
+    house: number,
     chance: number,
     yatzy: number,
 

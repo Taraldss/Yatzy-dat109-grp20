@@ -4,13 +4,14 @@ import styles from "./PlayerContainer.module.css"
 
 interface Props {
     players: Player[],
+    activePlayer: Player;
 }
 
-const PlayerContainer = ({players}: Props) => {
+const PlayerContainer = ({players, activePlayer}: Props) => {
     return (
         <div className={styles.root}>
             {players.map((p) => (
-                <PlayerCard player={p}/>
+                <PlayerCard player={p} activePlayer={activePlayer}/>
             ))}
         </div>
     );
