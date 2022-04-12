@@ -6,12 +6,13 @@ export default function Player({
   setName: any;
 }) {
   return (
-    <div>
+    <div className="margin-right">
       <input
         type="text"
-        placeholder="What's your name?"
+        placeholder="Name?"
         onChange={(event) => setName(event.target.value)}
         value={name}
+        className="player"
       />
     </div>
   );

@@ -59,3 +59,13 @@ button.held {
   color: white;
   background-color: green;
 }
+.player {
+  font-size: 1.5rem;
+  border: thin solid #999;
+  border-radius: 0.25rem;
+  width: 9rem;
+}
+
+.margin-right {
+  margin-right: 1rem;
+}
