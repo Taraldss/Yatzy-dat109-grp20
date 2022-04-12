@@ -18,7 +18,7 @@ let mockGames = {
   123: {
     round: 0,
     currentPlayer: 0,
-    players: ["arne", "tarald"],
+    players: ["tom", "jerry"],
     gameState: [
       [
         [0, 0, 0, 0, 0],
@@ -78,10 +78,10 @@ app.post("/users/register", db.createUser);
 app.post("/users/login", db.logIn);
 app.get("/game", (req, res) => {});
 app.post("/game/new", (req, res) => {
-  function cb(result){
+  function cb(result) {
     res.send(result);
   }
-  db.createGame(req.params.password, req.params.active, cb)
+  db.createGame(req.params.password, req.params.active, cb);
 });
 app.get("/game/:id", (req, res) => {
   // status of game
@@ -90,7 +90,7 @@ app.get("/game/:id", (req, res) => {
 app.post("/game/:id", (req, res) => {
   const data = req.body;
   mockGames[data.id] = updateScore(data); // returnere nytt GameObj
-  return mockGames[data.id];
+  res.send(mockGames[data.id]);
   // status of game
 });
 app.listen(port, () => {

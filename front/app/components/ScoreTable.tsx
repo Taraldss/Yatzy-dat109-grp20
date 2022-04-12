@@ -26,12 +26,20 @@ export default function ScoreTable({ game }: { game: Game }) {
       curr.map((item) => 0)
     )
   );
-  const renderTableRows = (array: TableData[]) =>
+  const renderTableRows = (array: TableData[], indexShift: number) =>
     array.map((round, i) => (
-      <tr key={"round" + i}>
+      <tr
+        key={"round" + i}
+        className={i + indexShift == game.round ? "highlight" : ""}
+      >
         <td>{round.name}</td>
         {round.players.map((player, ip) => (
-          <td key={"player" + ip} className="align-right">
+          <td
+            key={"player" + ip}
+            className={
+              ip == game.currentPlayer ? "align-right softlight" : "align-right"
+            }
+          >
             {player}
           </td>
         ))}
@@ -52,11 +60,18 @@ export default function ScoreTable({ game }: { game: Game }) {
           </tr>
         </thead>
         <tbody>
-          {renderTableRows(above)}
+          {renderTableRows(above, 0)}
           <tr>
             <td>Sum</td>
             {sumAbove.map((player, i) => (
-              <td className="align-right" key={"sum" + i}>
+              <td
+                className={
+                  i == game.currentPlayer
+                    ? "align-right softlight"
+                    : "align-right"
+                }
+                key={"sum" + i}
+              >
                 {player}
               </td>
             ))}
@@ -64,16 +79,30 @@ export default function ScoreTable({ game }: { game: Game }) {
           <tr>
             <td>Bonus</td>
             {bonus.map((bonus, i) => (
-              <td className="align-right" key={"bonus" + i}>
+              <td
+                className={
+                  i == game.currentPlayer
+                    ? "align-right softlight"
+                    : "align-right"
+                }
+                key={"bonus" + i}
+              >
                 {bonus}
               </td>
             ))}
           </tr>
-          {renderTableRows(below)}
+          {renderTableRows(below, 6)}
           <tr>
             <td>Sum</td>
             {sumTotal.map((player, i) => (
-              <td key={"sum" + i} className="align-right">
+              <td
+                key={"sum" + i}
+                className={
+                  i == game.currentPlayer
+                    ? "align-right softlight"
+                    : "align-right"
+                }
+              >
                 {player}
               </td>
             ))}

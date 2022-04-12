@@ -47,3 +47,15 @@ button.dice {
 button.held {
   background-color: lightgreen;
 }
+
+.highlight td {
+  background-color: lightgreen;
+}
+
+.softlight {
+  background-color: #eee;
+}
+.highlight .softlight {
+  color: white;
+  background-color: green;
+}

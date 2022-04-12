@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface OneTurn {
   round: number;
+  currentPlayer: number;
   submitScore: (result: number[], round: number) => void;
 }
 
@@ -9,19 +10,27 @@ interface Dice {
   value: number;
   held: boolean;
 }
+const emptyDice = [
+  { value: 0, held: false },
+  { value: 0, held: false },
+  { value: 0, held: false },
+  { value: 0, held: false },
+  { value: 0, held: false },
+];
 
-export default function RealTimeDice({ round, submitScore }: OneTurn) {
-  const emptyDice = [
-    { value: 0, held: false },
-    { value: 0, held: false },
-    { value: 0, held: false },
-    { value: 0, held: false },
-    { value: 0, held: false },
-  ];
+export default function RealTimeDice({
+  round,
+  currentPlayer,
+  submitScore,
+}: OneTurn) {
   const rDice = () => Math.floor(Math.random() * 6 + 1);
   const [rollsLeft, setRollsLeft] = useState(3);
   const [dice, setDice] = useState(emptyDice);
 
+  useEffect(() => {
+    setRollsLeft(3);
+    setDice(emptyDice);
+  }, [currentPlayer]);
   function rollDice(dice: Dice[]) {
     setDice((prevState) =>
       prevState.map((dice) =>
