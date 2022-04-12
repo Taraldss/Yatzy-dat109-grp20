@@ -1,5 +1,6 @@
 export default interface Game {
-  rounds: number;
+  round: number;
+  currentPlayer: number;
   players: string[];
   gameState: number[][][];
 }

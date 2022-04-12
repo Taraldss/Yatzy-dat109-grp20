@@ -2,8 +2,7 @@ import { useState } from "react";
 
 interface OneTurn {
   round: number;
-  gameId: number;
-  submitScore: (result: number[], round: number, id: number) => void;
+  submitScore: (result: number[], round: number) => void;
 }
 
 interface Dice {
@@ -11,7 +10,7 @@ interface Dice {
   held: boolean;
 }
 
-export default function RealTimeDice({ round, gameId, submitScore }: OneTurn) {
+export default function RealTimeDice({ round, submitScore }: OneTurn) {
   const emptyDice = [
     { value: 0, held: false },
     { value: 0, held: false },
@@ -60,8 +59,7 @@ export default function RealTimeDice({ round, gameId, submitScore }: OneTurn) {
           onClick={() =>
             submitScore(
               dice.map((dice) => dice.value),
-              round,
-              gameId
+              round
             )
           }
         >

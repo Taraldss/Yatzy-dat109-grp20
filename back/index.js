@@ -4,6 +4,7 @@ const cors = require("cors");
 const app = express();
 const port = 3030;
 const db = require("./queries");
+const updateScore = require("./helpers/updateScore");
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -85,6 +86,12 @@ app.post("/game/new", (req, res) => {
 app.get("/game/:id", (req, res) => {
   // status of game
   res.json(mockGames[req.params.id] ? mockGames[req.params.id] : null);
+});
+app.post("/game/:id", (req, res) => {
+  const data = req.body;
+  mockGames[data.id] = updateScore(data); // returnere nytt GameObj
+  return mockGames[data.id];
+  // status of game
 });
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
